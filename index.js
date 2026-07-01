@@ -92,7 +92,7 @@ app.get("/retry-esewa/:purchaseId", async (req, res) => {
     const supportData = await Support.create({
       paymentMethod: previousSupport.paymentMethod,
       amount: previousSupport.amount,
-      donorName: previousSupport.donorName,
+      name: previousSupport.name,
       message: previousSupport.message,
       status: "pending",
     });
