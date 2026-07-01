@@ -31,7 +31,7 @@ async function verifyEsewaPayment(encodedData) {
       "Content-Type": "application/json",
     };
 
-    const data = `transaction_code=${decodedData.transaction_code},status=${decodedData.status},total_amount=${decodedData.total_amount},transaction_uuid=${decodedData.transaction_uuid},product_code=${process.env.ESEWA_PRODUCT_CODE},signed_field_names=${decodedData.signed_field_names}`;
+    const data = `transaction_code=${decodedData.transaction_code},status=${decodedData.status},total_amount=${decodedData.total_amount},transaction_uuid=${decodedData.transaction_uuid},product_code=${process.env.ESEWA_PRODUCT_CODE}`;
 
     const secretKey = process.env.ESEWA_SECRET_KEY;
     const hash = crypto
