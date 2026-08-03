@@ -76,13 +76,13 @@
           </div>
 
           <div class="mt-5 grid grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-3" id="amountGrid">
-            <button class="amount-option rounded-2xl border-2 border-bean bg-bean px-4 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-mocha sm:py-4" type="button" d[...]
+            <button class="amount-option rounded-2xl border-2 border-bean bg-bean px-4 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-mocha sm:py-4" type="button" data-amount="100">
               Rs. 100
             </button>
-            <button class="amount-option rounded-2xl border-2 border-latte bg-white px-4 py-3.5 text-sm font-bold text-bean transition hover:-translate-y-0.5 hover:border-caramel sm:py-4" type="bu[...]
+            <button class="amount-option rounded-2xl border-2 border-latte bg-white px-4 py-3.5 text-sm font-bold text-bean transition hover:-translate-y-0.5 hover:border-caramel sm:py-4" type="button" data-amount="250">
               Rs. 250
             </button>
-            <button class="amount-option rounded-2xl border-2 border-latte bg-white px-4 py-3.5 text-sm font-bold text-bean transition hover:-translate-y-0.5 hover:border-caramel sm:py-4" type="bu[...]
+            <button class="amount-option rounded-2xl border-2 border-latte bg-white px-4 py-3.5 text-sm font-bold text-bean transition hover:-translate-y-0.5 hover:border-caramel sm:py-4" type="button" data-amount="500">
               Rs. 500
             </button>
           </div>
@@ -144,6 +144,11 @@
     const submitButton = document.getElementById("submitButton");
     const statusEl = document.getElementById("status");
 
+    function updateSubmitButtonDisplay(amount) {
+      if (!submitButton) return;
+      submitButton.textContent = `Continue to eSewa — Rs. ${amount}`;
+    }
+
     function setActiveAmount(selectedAmount) {
       amountButtons.forEach((button) => {
         const isActive = button.dataset.amount === String(selectedAmount);
@@ -154,6 +159,7 @@
         button.classList.toggle("text-bean", !isActive);
         button.classList.toggle("border-latte", !isActive);
       });
+      updateSubmitButtonDisplay(selectedAmount);
     }
 
     amountButtons.forEach((button) => {
@@ -165,7 +171,11 @@
 
     amountInput.addEventListener("input", () => {
       setActiveAmount(amountInput.value);
+      updateSubmitButtonDisplay(amountInput.value);
     });
+
+    // initialize button display
+    updateSubmitButtonDisplay(amountInput.value || 100);
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
